@@ -1,0 +1,20 @@
+<resources>
+    <string-array name="activity_choices">
+        <item>Standard</item>
+        <item>Single Instance</item>
+        <item>Single Top</item>
+        <item>Single Task</item>
+        <item>Single Instance Per Task</item>
+    </string-array>
+
+    <string-array name="switch_choices">
+        <item>Reorder</item>
+        <item>Clear Top</item>
+    </string-array>
+
+    <string-array name="fragment_type">
+        <item>Remove</item>
+        <item>Attach/Detach</item>
+        <item>Show/Hide</item>
+    </string-array>
+</resources>

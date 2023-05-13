@@ -1,0 +1,83 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.FirstTrainer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="strokeColor">@color/text</item>
+        <item name="colorPrimary">@color/second_light_shade</item>
+        <item name="colorOnPrimary">@color/bright_text</item>
+
+        <item name="android:fontFamily">@font/montserrat_light</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/second</item>
+        <item name="colorSecondaryVariant">@color/second_variation</item>
+        <item name="colorOnSecondary">@color/text</item>
+        <!-- Status bar color. -->
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.SecondTrainer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="strokeColor">@color/text</item>
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorOnPrimary">@color/text</item>
+
+        <item name="android:fontFamily">@font/montserrat_light</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/second</item>
+        <item name="colorSecondaryVariant">@color/second_variation</item>
+        <item name="colorOnSecondary">@color/text</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MainTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/bright_text</item>
+
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorOnPrimary">@color/text</item>
+
+        <item name="android:fontFamily">@font/montserrat_light</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SamsungProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SamsungProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minWidth">40dip</item>
+        <item name="android:minHeight">40dip</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="cornerRadius">20dp</item>
+
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:ellipsize">middle</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/gradient</item>
+
+        <item name="background">@drawable/gradient</item>
+    </style>
+</resources>

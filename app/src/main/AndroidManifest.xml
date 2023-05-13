@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:targetApi="31">
+        <receiver
+            android:name=".firstTrainer.ActivityStateReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ACTIVITY_STATE_ACTION" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MainTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".firstTrainer.activities.FirstTrainer"
+            android:exported="true"
+            android:theme="@style/Theme.FirstTrainer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity android:name=".firstTrainer.activities.StandardActivity"
+            android:launchMode="standard"
+            android:theme="@style/Theme.FirstTrainer"/>
+
+        <activity android:name=".firstTrainer.activities.SingleInstanceActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.FirstTrainer"/>
+
+        <activity android:name=".firstTrainer.activities.SingleTopActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.FirstTrainer"/>
+
+        <activity android:name=".firstTrainer.activities.SingleTaskActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.FirstTrainer"/>
+
+        <activity android:name=".firstTrainer.activities.SingleInstancePerTaskActivity"
+            android:launchMode="singleInstancePerTask"
+            android:theme="@style/Theme.FirstTrainer"/>
+
+        <activity
+            android:name=".secondTrainer.SecondTrainerActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SecondTrainer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+    </application>
+
+</manifest>
