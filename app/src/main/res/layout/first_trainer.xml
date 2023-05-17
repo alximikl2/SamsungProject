@@ -4,10 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firstTrainer.activities.FirstTrainer">
+    tools:context=".firstTrainer.activities.FirstTrainer"
+    android:id="@+id/layout">
 
     <include
-        layout="@layout/activity_frame"
+        layout="@layout/first_trainer_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

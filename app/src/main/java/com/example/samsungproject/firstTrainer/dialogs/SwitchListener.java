@@ -1,5 +1,6 @@
 package com.example.samsungproject.firstTrainer.dialogs;
 
+import static com.example.samsungproject.firstTrainer.Tags.CLEAR_TASK;
 import static com.example.samsungproject.firstTrainer.Tags.CLEAR_TOP;
 import static com.example.samsungproject.firstTrainer.Tags.REORDER;
 
@@ -20,6 +21,9 @@ public class SwitchListener implements AdapterView.OnItemSelectedListener {
                 break;
             case 1:
                 result = CLEAR_TOP;
+                break;
+            case 2:
+                result = CLEAR_TASK;
                 break;
             default:
                 Log.e("TYPE", "New dialog type found");

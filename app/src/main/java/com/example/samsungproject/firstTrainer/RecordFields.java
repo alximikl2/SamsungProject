@@ -6,6 +6,13 @@ import java.util.Objects;
 public class RecordFields {
     private static final ArrayList<ActivityRecord> records = new ArrayList<>();
     private static final ArrayList<Runnable> notifications = new ArrayList<>();
+    private static boolean tutorialFirst, tutorialSecond, tutorialThird;
+    
+    public static void setTutorial(boolean bool){
+        tutorialFirst = bool;
+        tutorialSecond = bool;
+        tutorialThird = bool;
+    }
 
     public static void addRecord(ActivityRecord record){
         records.add(record);
@@ -47,5 +54,29 @@ public class RecordFields {
 
     public static ArrayList<ActivityRecord> getRecords() {
         return records;
+    }
+
+    public static boolean isTutorialFirst() {
+        if(tutorialFirst){
+            tutorialFirst = false;
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isTutorialSecond() {
+        if(tutorialSecond){
+            tutorialSecond = false;
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isTutorialThird() {
+        if(tutorialThird){
+            tutorialThird = false;
+            return true;
+        }
+        return false;
     }
 }

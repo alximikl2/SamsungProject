@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.samsungproject.databinding.ActivityMainBinding;
+import com.example.samsungproject.firstTrainer.RecordFields;
 import com.example.samsungproject.firstTrainer.activities.FirstTrainer;
 import com.example.samsungproject.secondTrainer.SecondTrainerActivity;
 
@@ -18,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         binding.layout1.setOnClickListener((View view) -> {
             Intent intent = new Intent(this, FirstTrainer.class);
+            RecordFields.setTutorial(true); //TODO: add variation
             startActivity(intent);
         });
         binding.layout2.setOnClickListener((View view) -> {

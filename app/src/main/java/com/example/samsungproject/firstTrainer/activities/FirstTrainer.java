@@ -4,11 +4,14 @@ import static com.example.samsungproject.firstTrainer.Tags.ID;
 import static com.example.samsungproject.firstTrainer.Tags.ON_CREATE;
 import static com.example.samsungproject.firstTrainer.Tags.ON_DESTROY;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,20 +28,26 @@ import com.example.samsungproject.firstTrainer.RecordFields;
 import com.example.samsungproject.firstTrainer.Tags;
 import com.example.samsungproject.firstTrainer.dialogs.ActivityCreateDialog;
 import com.example.samsungproject.firstTrainer.dialogs.ActivitySwitchDialog;
+import com.example.samsungproject.firstTrainer.popup.PopupTutorial;
 
 public class FirstTrainer extends AppCompatActivity {
     private FirstTrainerBinding binding;
     private final String name = Types.MAIN.getName();
+    private RecyclerView rv;
+    private boolean tutorial;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tutorial = RecordFields.isTutorialFirst();
 
         ActivityRecord record = new ActivityRecord(name, "No parent", true, Types.STANDARD, this::finish);
         RecordFields.addRecord(record);
 
-        setTitle(Types.MAIN.getName());
         binding = FirstTrainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setTitle(Types.MAIN.getName());
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -48,7 +57,7 @@ public class FirstTrainer extends AppCompatActivity {
         ActivitiesAdapter adapter = new ActivitiesAdapter(Types.MAIN.getName());
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        RecyclerView rv = findViewById(R.id.table);
+        rv = findViewById(R.id.table);
         rv.setLayoutManager(llm);
         rv.setAdapter(adapter);
 
@@ -58,7 +67,32 @@ public class FirstTrainer extends AppCompatActivity {
         registerReceiver(new ActivityStateReceiver(), ifi);
 
         sendMessageToBroadcast(ON_CREATE.getId());
+    }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(tutorial) {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                View popupView = getLayoutInflater().inflate(R.layout.tutorial_first_popup, null);
+                PopupTutorial popupTutorial = new PopupTutorial(popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupTutorial.putString(getResources().getString(R.string.message_popup_first_1));
+                this.runOnUiThread(() -> {
+                    popupTutorial.showAsDropDown(rv.getChildAt(0),
+                            (int) (getResources().getDisplayMetrics().density * 8), 0);
+                });
+            });
+            thread.start();
+            tutorial = false;
+        }
     }
 
     @Override
@@ -81,16 +115,17 @@ public class FirstTrainer extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         if (id == R.id.new_activity_create) {
             ActivityCreateDialog dialog = new ActivityCreateDialog(name);
-            dialog.show(getSupportFragmentManager(), "New Activity Dialog");
+            dialog.show(getSupportFragmentManager(), null);
             return true;
         }
         if(id == R.id.switch_activity){
             ActivitySwitchDialog dialog = new ActivitySwitchDialog();
-            dialog.show(getSupportFragmentManager(), "New Switch Dialog");
+            dialog.show(getSupportFragmentManager(), null);
             return true;
         }
 

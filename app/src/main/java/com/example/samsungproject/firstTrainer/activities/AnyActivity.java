@@ -7,6 +7,7 @@ import static com.example.samsungproject.firstTrainer.Tags.ON_CREATE;
 import static com.example.samsungproject.firstTrainer.Tags.ON_DESTROY;
 import static com.example.samsungproject.firstTrainer.Tags.PARENT_NAME;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.samsungproject.R;
-import com.example.samsungproject.databinding.ActivityFrameBinding;
+import com.example.samsungproject.databinding.FirstTrainerFrameBinding;
 import com.example.samsungproject.firstTrainer.ActivitiesAdapter;
 import com.example.samsungproject.firstTrainer.ActivityRecord;
 import com.example.samsungproject.firstTrainer.RecordFields;
@@ -28,13 +29,15 @@ import com.example.samsungproject.firstTrainer.dialogs.ActivityCreateDialog;
 import com.example.samsungproject.firstTrainer.dialogs.ActivitySwitchDialog;
 
 public abstract class AnyActivity extends AppCompatActivity {
-    private ActivityFrameBinding binding;
+    private FirstTrainerFrameBinding binding;
     private String name;
     protected Types type;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTypeByName();
+
+        setType();
 
         name = getIntent().getStringExtra(ACTIVITY_NAME.getName());
         String parent = getIntent().getStringExtra(PARENT_NAME.getName());
@@ -47,9 +50,10 @@ public abstract class AnyActivity extends AppCompatActivity {
         ActivityRecord record = new ActivityRecord(name, parent, isTask, type, this::finish);
         RecordFields.addRecord(record);
 
-        setTitle(name);
-        binding = ActivityFrameBinding.inflate(getLayoutInflater());
+        binding = FirstTrainerFrameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setTitle(name);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -71,7 +75,7 @@ public abstract class AnyActivity extends AppCompatActivity {
         this.type = type;
     }
 
-    protected void setTypeByName(){
+    protected void setType(){
         setType(Types.NULL);
     }
 
@@ -99,12 +103,12 @@ public abstract class AnyActivity extends AppCompatActivity {
 
         if (id == R.id.new_activity_create) {
             ActivityCreateDialog dialog = new ActivityCreateDialog(name);
-            dialog.show(getSupportFragmentManager(), "New Activity Dialog");
+            dialog.show(getSupportFragmentManager(), null);
             return true;
         }
         if(id == R.id.switch_activity){
             ActivitySwitchDialog dialog = new ActivitySwitchDialog();
-            dialog.show(getSupportFragmentManager(), "New Switch Dialog");
+            dialog.show(getSupportFragmentManager(), null);
             return true;
         }
 

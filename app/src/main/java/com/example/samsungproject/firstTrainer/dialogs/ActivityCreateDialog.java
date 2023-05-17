@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,12 +32,16 @@ import com.example.samsungproject.firstTrainer.activities.SingleTaskActivity;
 import com.example.samsungproject.firstTrainer.activities.SingleTopActivity;
 import com.example.samsungproject.firstTrainer.activities.StandardActivity;
 import com.example.samsungproject.firstTrainer.activities.Types;
+import com.example.samsungproject.firstTrainer.popup.PopupTutorial;
 
 public class ActivityCreateDialog extends DialogFragment {
     private final String parent;
+    private boolean tutorial;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        tutorial = RecordFields.isTutorialSecond();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
 
@@ -49,17 +54,40 @@ public class ActivityCreateDialog extends DialogFragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        ActivityListener spinnerActivity = new ActivityListener();
+        CreateListener spinnerActivity = new CreateListener();
         spinner.setOnItemSelectedListener(spinnerActivity);
 
         EditText editText = v.findViewById(R.id.activity_name);
         CheckBox checkBox = v.findViewById(R.id.is_task);
 
+        if (tutorial) {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                View popupView = inflater.inflate(R.layout.tutorial_first_popup, null);
+                PopupTutorial popupTutorial = new PopupTutorial(popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupTutorial.putString(getResources().getString(R.string.message_popup_first_2));
+                v.post(() -> {
+                    popupTutorial.showAsDropDown(editText,
+                            (int) (getResources().getDisplayMetrics().density * 8), 0);
+                });
+            });
+            thread.start();
+        }
+
         Button button = v.findViewById(R.id.add_button);
         button.setOnClickListener((View view) -> {
             String name = editText.getText().toString();
-            if(RecordFields.inRecords(name)){
+            if(RecordFields.inRecords(name)) {
                 Toast.makeText(getContext(), "Activity with that name already exists", Toast.LENGTH_SHORT).show();
+            } else if(name.equals("")){
+                Toast.makeText(getContext(), "Enter an activity name", Toast.LENGTH_SHORT).show();
             } else {
                 Types result = spinnerActivity.getResult();
 
@@ -94,6 +122,7 @@ public class ActivityCreateDialog extends DialogFragment {
                 } else{
                     intent.putExtra(IS_TASK.getName(), false);
                 }
+                intent.putExtra("boolean", tutorial);
                 startActivity(intent);
                 this.dismiss();
             }

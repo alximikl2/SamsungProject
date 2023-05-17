@@ -8,7 +8,8 @@ public enum Tags{
     PARENT_NAME("Parent name", -3),
     IS_TASK("Is task", -4),
     REORDER("Reorder", 11),
-    CLEAR_TOP("Clear top", 12);
+    CLEAR_TOP("Clear top", 12),
+    CLEAR_TASK("Clear task", 12);
 
     private final String name;
     private final int id;

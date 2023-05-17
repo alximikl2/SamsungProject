@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.SecondTrainer">
 
     <!--app:strokeColor="@color/secondText" -->
     <!--app:strokeWidth="4px" -->
@@ -12,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/second"
+        android:fontFamily="@font/montserrat_semibold"
+        android:letterSpacing="-0.0025"
         android:text="Add"
         android:textAllCaps="false"
-        android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:letterSpacing="-0.0025"
 
-        android:backgroundTint="@color/second"
+        android:textSize="14sp"
 
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Fragment Name"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

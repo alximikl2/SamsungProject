@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.samsungproject.R;
+import com.example.samsungproject.firstTrainer.popup.PopupInfo;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,29 +24,37 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     private final String activityName;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView typeTextView;
+        //private final TextView typeTextView;
         private final TextView nameTextView;
-        private final TextView parentTextView;
-        private final TextView isTask;
+        //private final TextView parentTextView;
+        //private final TextView isTask;
         private final Button finishButton;
+        private final Button showButton;
+        private final View popupView;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, View popupView) {
             super(view);
 
-            typeTextView = view.findViewById(R.id.type);
+            //typeTextView = view.findViewById(R.id.type);
             nameTextView = view.findViewById(R.id.name);
-            parentTextView = view.findViewById(R.id.parent);
-            isTask = view.findViewById(R.id.task);
+            //parentTextView = view.findViewById(R.id.parent);
+            //isTask = view.findViewById(R.id.task);
             finishButton = view.findViewById(R.id.button);
+            showButton = view.findViewById(R.id.show_button);
+            this.popupView = popupView;
         }
 
-        public TextView[] getTextViews() {
-            return new TextView[]{typeTextView, nameTextView, parentTextView, isTask};
+        public TextView getTextView() {
+            return nameTextView;
         }
 
         public Button getButton() {
             return finishButton;
         }
+
+        public Button getImageButton(){return showButton;}
+
+        public View getPopupView(){return popupView;}
     }
 
     public ActivitiesAdapter(String activityName) {
@@ -65,31 +75,22 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
 
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.table_row, viewGroup, false);
+        View popupView = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.more_info, null);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view, popupView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        final TextView[] textViews = viewHolder.getTextViews();
+        final TextView nameTextView = viewHolder.getTextView();
         final Button button = viewHolder.getButton();
-
-        TextView typeTextView = textViews[0];
-        TextView nameTextView = textViews[1];
-        TextView parentTextView = textViews[2];
-        TextView isTask = textViews[3];
+        final Button imageButton = viewHolder.getImageButton();
 
         ActivityRecord record = records.get(position);
         String name = record.getName();
 
-        typeTextView.setText(record.getType().getName());
         nameTextView.setText(name);
-        parentTextView.setText(record.getParent());
-        if(record.isTask()) {
-            isTask.setText("Task");
-        } else {
-            isTask.setText("Not A Task");
-        }
 
         if(Objects.equals(name, activityName) || Objects.equals(name, MAIN.getName())){
             button.setVisibility(View.INVISIBLE);
@@ -100,6 +101,19 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
                 RecordFields.removeRecord(record.getName());
             });
         }
+        imageButton.setOnClickListener((View view) -> {
+            PopupInfo popupWindow = new PopupInfo(viewHolder.getPopupView(),
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    true);
+            if(record.isTask()) {
+                popupWindow.fillStrings(record.getParent(), "Task", record.getType().getName());
+            } else {
+                popupWindow.fillStrings(record.getParent(), "Not A Task", record.getType().getName());
+            }
+            popupWindow.showAsDropDown(view);
+        });
+
     }
 
     @Override

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".secondTrainer.MainFragment"
-    android:id="@+id/fragment_main">
+    android:id="@+id/fragment_main"
+    android:theme="@style/Theme.SecondTrainer">
 
     <TextView
         android:id="@+id/name_textview"

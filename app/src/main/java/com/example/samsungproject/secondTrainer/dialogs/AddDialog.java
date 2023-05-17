@@ -80,6 +80,7 @@ public class AddDialog extends DialogFragment {
             } else {
                 Toast.makeText(getContext(), "Enter A Fragment Name", Toast.LENGTH_SHORT).show();
             }
+            this.dismiss();
         });
 
 

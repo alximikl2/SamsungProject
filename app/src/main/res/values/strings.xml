@@ -1,4 +1,10 @@
 <resources>
+    <string name="more_info"><u>More info</u></string>
+
+    <string name="message_popup_first_1">Первая колонка содержит имя активности.\nВо второй колонке рассположена дополнительная информация.\nВ заголовке окна - имя текущей активности.</string>
+    <string name="message_popup_first_2">Здесь нужно ввести имя активности.\nИмя условно, оно нужно, чтобы пользователь различал активности.\nТакже необходимо выбрать тип активности.\nОб этих типах рассказано тут - https://developer.android.com/guide/components/activities/tasks-and-back-stack</string>
+    <string name="message_popup_first_3">Здесь необходимо выбрать тип активности(он же класс), на который будет совершен переход.\nТакже необходимо вырать механизм перехода.\nПодробнее об этих механизмах - https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_CLEAR_TASK</string>
+
     <string-array name="activity_choices">
         <item>Standard</item>
         <item>Single Instance</item>
@@ -8,8 +14,9 @@
     </string-array>
 
     <string-array name="switch_choices">
-        <item>Reorder</item>
+        <item>Reorder To Front</item>
         <item>Clear Top</item>
+        <item>Clear Task</item>
     </string-array>
 
     <string-array name="fragment_type">

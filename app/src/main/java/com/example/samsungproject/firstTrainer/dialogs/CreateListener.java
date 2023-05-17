@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 
 import com.example.samsungproject.firstTrainer.activities.Types;
 
-public class ActivityListener implements AdapterView.OnItemSelectedListener {
+public class CreateListener implements AdapterView.OnItemSelectedListener {
     private Types result;
 
     public void onItemSelected(AdapterView<?> parent, View view,
