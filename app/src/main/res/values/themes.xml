@@ -47,6 +47,10 @@
 
         <item name="android:fontFamily">@font/montserrat_light</item>
 
+        <item name="colorSecondary">@color/second</item>
+        <item name="colorSecondaryVariant">@color/second_variation</item>
+        <item name="colorOnSecondary">@color/text</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

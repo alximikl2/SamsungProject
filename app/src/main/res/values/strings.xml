@@ -5,6 +5,10 @@
     <string name="message_popup_first_2">Здесь нужно ввести имя активности.\nИмя условно, оно нужно, чтобы пользователь различал активности.\nТакже необходимо выбрать тип активности.\nОб этих типах рассказано тут - https://developer.android.com/guide/components/activities/tasks-and-back-stack</string>
     <string name="message_popup_first_3">Здесь необходимо выбрать тип активности(он же класс), на который будет совершен переход.\nТакже необходимо вырать механизм перехода.\nПодробнее об этих механизмах - https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_CLEAR_TASK</string>
 
+    <string name="message_popup_second_1">Это основное окно тренажера фрагментов.\nСверху будет находится ряд кнопок, благодаря которым можно менять видимый фрагмент, а также уже находится кнопка для добавления нового фрагмента.</string>
+    <string name="message_popup_second_2">Здесь нужно ввести имя фрагмента.\nИмя условно, оно нужно, чтобы пользователь различал фрагменты.\nТакже необходимо выбрать механизм смены фрагмента.\nRemove - удаление самого фрагмента,\nDetach - удаление View фрагмента,\nHide - сокрытие View фрагмента.</string>
+    <string name="message_popup_second_3">Вот и сам фрагмент. Здесь вы можете протестировать разницу между механизмами смены фрагментов.\nФрагменты меняются благодаря кнопок сверху, а кнопка посередине фрагмента позволяет динамически изменить View фрагмента.</string>
+
     <string-array name="activity_choices">
         <item>Standard</item>
         <item>Single Instance</item>

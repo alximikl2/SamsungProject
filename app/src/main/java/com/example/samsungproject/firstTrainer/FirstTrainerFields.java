@@ -3,10 +3,16 @@ package com.example.samsungproject.firstTrainer;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RecordFields {
+public class FirstTrainerFields {
     private static final ArrayList<ActivityRecord> records = new ArrayList<>();
     private static final ArrayList<Runnable> notifications = new ArrayList<>();
     private static boolean tutorialFirst, tutorialSecond, tutorialThird;
+    private static int nullIterator = 0;
+
+    public static int getNullIndex(){
+        nullIterator += 1;
+        return nullIterator;
+    }
     
     public static void setTutorial(boolean bool){
         tutorialFirst = bool;
@@ -37,7 +43,7 @@ public class RecordFields {
     public static void removeRecord(String name){
         for(int i = 0; i < records.size(); i++){
             if(Objects.equals(records.get(i).getName(), name)){
-                RecordFields.removeRecord(i);
+                FirstTrainerFields.removeRecord(i);
                 break;
             }
         }

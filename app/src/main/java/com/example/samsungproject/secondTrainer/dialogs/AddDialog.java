@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,13 +17,16 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.samsungproject.popup.PopupTutorial;
 import com.example.samsungproject.secondTrainer.ButtonRow;
 import com.example.samsungproject.secondTrainer.MainFragment;
 import com.example.samsungproject.R;
+import com.example.samsungproject.secondTrainer.SecondTrainerFields;
 import com.google.android.material.button.MaterialButton;
 
 public class AddDialog extends DialogFragment {
     private final ButtonRow buttonRow;
+    private boolean tutorial;
 
     public AddDialog(ButtonRow buttonRow) {
         this.buttonRow = buttonRow;
@@ -31,6 +35,8 @@ public class AddDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        tutorial = SecondTrainerFields.isTutorialSecond();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
 
@@ -50,6 +56,26 @@ public class AddDialog extends DialogFragment {
         MaterialButton button = v.findViewById(R.id.add_button);
 
         FragmentManager fragmentManager = getParentFragmentManager();
+
+        if (tutorial) {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                View popupView = inflater.inflate(R.layout.tutorial_first_popup, null);
+                PopupTutorial popupTutorial = new PopupTutorial(popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupTutorial.putString(getResources().getString(R.string.message_popup_second_2));
+                v.post(() -> {
+                    popupTutorial.showAsDropDown(editText);
+                });
+            });
+            thread.start();
+        }
 
         button.setOnClickListener((View view) -> {
             String name = editText.getText().toString();

@@ -1,4 +1,4 @@
-package com.example.samsungproject.firstTrainer.popup;
+package com.example.samsungproject.popup;
 
 import android.view.View;
 import android.widget.PopupWindow;

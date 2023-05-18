@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.samsungproject.R;
 import com.example.samsungproject.databinding.FragmentMainBinding;
+import com.example.samsungproject.popup.PopupTutorial;
 import com.google.android.material.button.MaterialButton;
 
 public class MainFragment extends Fragment {
@@ -24,6 +25,8 @@ public class MainFragment extends Fragment {
     private final FragmentTypes type;
     private final String name;
     private int iterator = 1;
+    private boolean tutorial;
+    private View viewForPopup;
 
     public MainFragment(ButtonRow buttonRow, FragmentTypes type, String name){
         this.buttonRow = buttonRow;
@@ -34,6 +37,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         buttonRow.createButton(this);
+        tutorial = SecondTrainerFields.isTutorialThird();
         super.onCreate(savedInstanceState);
     }
 
@@ -62,7 +66,35 @@ public class MainFragment extends Fragment {
             iterator += 1;
         });
 
+        viewForPopup = view;
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(tutorial) {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                View popupView = getLayoutInflater().inflate(R.layout.tutorial_first_popup, null);
+                PopupTutorial popupTutorial = new PopupTutorial(popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupTutorial.putString(getResources().getString(R.string.message_popup_second_3));
+                viewForPopup.post(() -> {
+                    popupTutorial.showAsDropDown(binding.typeTextview,
+                            (int) (getResources().getDisplayMetrics().density * -8), 0);
+                });
+            });
+            thread.start();
+            tutorial = false;
+        }
     }
 
     @Override

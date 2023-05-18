@@ -4,7 +4,6 @@
     <corners
         android:radius="10dp" />
     <gradient
-        android:angle="360"
         android:gradientRadius="10dp"
         android:startColor="@color/second"
         android:endColor="@color/second_light_shade"/>

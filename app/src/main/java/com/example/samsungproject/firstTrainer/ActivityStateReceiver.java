@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class ActivityStateReceiver extends BroadcastReceiver { //TODO: fix
+public class ActivityStateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

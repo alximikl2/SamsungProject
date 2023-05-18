@@ -24,11 +24,11 @@ import com.example.samsungproject.databinding.FirstTrainerBinding;
 import com.example.samsungproject.firstTrainer.ActivitiesAdapter;
 import com.example.samsungproject.firstTrainer.ActivityRecord;
 import com.example.samsungproject.firstTrainer.ActivityStateReceiver;
-import com.example.samsungproject.firstTrainer.RecordFields;
+import com.example.samsungproject.firstTrainer.FirstTrainerFields;
 import com.example.samsungproject.firstTrainer.Tags;
 import com.example.samsungproject.firstTrainer.dialogs.ActivityCreateDialog;
 import com.example.samsungproject.firstTrainer.dialogs.ActivitySwitchDialog;
-import com.example.samsungproject.firstTrainer.popup.PopupTutorial;
+import com.example.samsungproject.popup.PopupTutorial;
 
 public class FirstTrainer extends AppCompatActivity {
     private FirstTrainerBinding binding;
@@ -39,10 +39,10 @@ public class FirstTrainer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tutorial = RecordFields.isTutorialFirst();
+        tutorial = FirstTrainerFields.isTutorialFirst();
 
         ActivityRecord record = new ActivityRecord(name, "No parent", true, Types.STANDARD, this::finish);
-        RecordFields.addRecord(record);
+        FirstTrainerFields.addRecord(record);
 
         binding = FirstTrainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -99,7 +99,7 @@ public class FirstTrainer extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        RecordFields.removeRecord(name);
+        FirstTrainerFields.removeRecord(name);
         sendMessageToBroadcast(Tags.ON_DESTROY.getId());
     }
 
@@ -137,10 +137,10 @@ public class FirstTrainer extends AppCompatActivity {
         onCreateIntent.setAction("ACTIVITY_STATE_ACTION");
         if (id == ON_CREATE.getId()) {
             onCreateIntent.putExtra(ID.getName(), ON_CREATE.getId());
-            onCreateIntent.putExtra(ON_CREATE.getName(), getLocalClassName());
+            onCreateIntent.putExtra(ON_CREATE.getName(), name);
         } else if(id == ON_DESTROY.getId()){
             onCreateIntent.putExtra(ID.getName(), ON_DESTROY.getId());
-            onCreateIntent.putExtra(ON_DESTROY.getName(), getLocalClassName());
+            onCreateIntent.putExtra(ON_DESTROY.getName(), name);
         }
         sendBroadcast(onCreateIntent);
     }

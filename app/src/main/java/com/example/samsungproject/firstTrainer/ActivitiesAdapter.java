@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.samsungproject.R;
-import com.example.samsungproject.firstTrainer.popup.PopupInfo;
+import com.example.samsungproject.popup.PopupInfo;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -59,13 +59,13 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
 
     public ActivitiesAdapter(String activityName) {
         this.activityName = activityName;
-        this.records = RecordFields.getRecords();
-        RecordFields.addNotification(this::update);
+        this.records = FirstTrainerFields.getRecords();
+        FirstTrainerFields.addNotification(this::update);
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void update(){
-        this.records = RecordFields.getRecords();
+        this.records = FirstTrainerFields.getRecords();
         this.notifyDataSetChanged();
     }
 
@@ -98,7 +98,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
             button.setVisibility(View.VISIBLE);
             button.setOnClickListener((View view) -> {
                 record.finishActivity();
-                RecordFields.removeRecord(record.getName());
+                FirstTrainerFields.removeRecord(record.getName());
             });
         }
         imageButton.setOnClickListener((View view) -> {

@@ -25,14 +25,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.samsungproject.R;
-import com.example.samsungproject.firstTrainer.RecordFields;
+import com.example.samsungproject.firstTrainer.FirstTrainerFields;
 import com.example.samsungproject.firstTrainer.activities.SingleInstanceActivity;
 import com.example.samsungproject.firstTrainer.activities.SingleInstancePerTaskActivity;
 import com.example.samsungproject.firstTrainer.activities.SingleTaskActivity;
 import com.example.samsungproject.firstTrainer.activities.SingleTopActivity;
 import com.example.samsungproject.firstTrainer.activities.StandardActivity;
 import com.example.samsungproject.firstTrainer.activities.Types;
-import com.example.samsungproject.firstTrainer.popup.PopupTutorial;
+import com.example.samsungproject.popup.PopupTutorial;
 
 public class ActivityCreateDialog extends DialogFragment {
     private final String parent;
@@ -40,7 +40,7 @@ public class ActivityCreateDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        tutorial = RecordFields.isTutorialSecond();
+        tutorial = FirstTrainerFields.isTutorialSecond();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -74,8 +74,7 @@ public class ActivityCreateDialog extends DialogFragment {
                         true);
                 popupTutorial.putString(getResources().getString(R.string.message_popup_first_2));
                 v.post(() -> {
-                    popupTutorial.showAsDropDown(editText,
-                            (int) (getResources().getDisplayMetrics().density * 8), 0);
+                    popupTutorial.showAsDropDown(editText);
                 });
             });
             thread.start();
@@ -84,10 +83,12 @@ public class ActivityCreateDialog extends DialogFragment {
         Button button = v.findViewById(R.id.add_button);
         button.setOnClickListener((View view) -> {
             String name = editText.getText().toString();
-            if(RecordFields.inRecords(name)) {
-                Toast.makeText(getContext(), "Activity with that name already exists", Toast.LENGTH_SHORT).show();
-            } else if(name.equals("")){
+            if(name.equals("")) {
                 Toast.makeText(getContext(), "Enter an activity name", Toast.LENGTH_SHORT).show();
+            } else if(name.contains("null")) {
+                Toast.makeText(getContext(), "Null name's are reserved", Toast.LENGTH_SHORT).show();
+            } else if(FirstTrainerFields.inRecords(name)){
+                Toast.makeText(getContext(), "Activity with that name already exists", Toast.LENGTH_SHORT).show();
             } else {
                 Types result = spinnerActivity.getResult();
 

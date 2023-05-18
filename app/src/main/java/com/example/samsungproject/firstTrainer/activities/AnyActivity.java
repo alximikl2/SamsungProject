@@ -24,7 +24,7 @@ import com.example.samsungproject.R;
 import com.example.samsungproject.databinding.FirstTrainerFrameBinding;
 import com.example.samsungproject.firstTrainer.ActivitiesAdapter;
 import com.example.samsungproject.firstTrainer.ActivityRecord;
-import com.example.samsungproject.firstTrainer.RecordFields;
+import com.example.samsungproject.firstTrainer.FirstTrainerFields;
 import com.example.samsungproject.firstTrainer.dialogs.ActivityCreateDialog;
 import com.example.samsungproject.firstTrainer.dialogs.ActivitySwitchDialog;
 
@@ -44,11 +44,12 @@ public abstract class AnyActivity extends AppCompatActivity {
         boolean isTask = getIntent().getBooleanExtra(IS_TASK.getName(), false);
 
         if(name == null){
-            finish();
+            parent = "Created Not By Create Activity Dialog";
+            name = "null " + FirstTrainerFields.getNullIndex(); //TODO: popup about it
         }
 
         ActivityRecord record = new ActivityRecord(name, parent, isTask, type, this::finish);
-        RecordFields.addRecord(record);
+        FirstTrainerFields.addRecord(record);
 
         binding = FirstTrainerFrameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -83,7 +84,7 @@ public abstract class AnyActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        RecordFields.removeRecord(name);
+        FirstTrainerFields.removeRecord(name);
         sendMessageToBroadcast(ON_DESTROY.getId());
     }
 
