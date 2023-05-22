@@ -43,6 +43,7 @@
     <string name="parent_string">"Родитель: "</string>
     <string name="task_string">"Задача: "</string>
     <string name="type_string">"Тип: "</string>
+    <string name="name_string">"Имя: "</string>
 
     <string-array name="activity_choices">
         <item>Standard</item>

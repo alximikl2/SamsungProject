@@ -46,10 +46,10 @@ public class MainFragment extends Fragment {
         View view = binding.getRoot();
 
         TextView textView = view.findViewById(R.id.name_textview);
-        textView.setText("Name: " + name);
+        textView.setText(getString(R.string.name_string) + name);
 
         TextView textView2 = view.findViewById(R.id.type_textview);
-        textView2.setText("Type: " + type.getName());
+        textView2.setText(getString(R.string.type_string) + type.getName());
 
         MaterialButton button = view.findViewById(R.id.add_something);
         LinearLayout layout = binding.newViews;

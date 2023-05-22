@@ -7,7 +7,6 @@ import static com.example.samsungproject.firstTrainer.Tags.ON_CREATE;
 import static com.example.samsungproject.firstTrainer.Tags.ON_DESTROY;
 import static com.example.samsungproject.firstTrainer.Tags.PARENT_NAME;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,7 +36,7 @@ public abstract class AnyActivity extends AppCompatActivity {
     protected Types type;
     private RecyclerView rv;
     private boolean tutorial, isNullName = false;
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

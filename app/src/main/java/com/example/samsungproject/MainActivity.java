@@ -20,6 +20,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        binding.layout1.setMaxHeight((int) (getResources().getDisplayMetrics().heightPixels * 0.45));
+        binding.layout2.setMaxHeight((int) (getResources().getDisplayMetrics().heightPixels * 0.45));
+
+        binding.layout1.setMaxWidth((int) (getResources().getDisplayMetrics().widthPixels * 0.45));
+        binding.layout2.setMaxWidth((int) (getResources().getDisplayMetrics().widthPixels * 0.45));
+
         setContentView(binding.getRoot());
 
         CheckBox checkBox = binding.getRoot().findViewById(R.id.tutorial);
