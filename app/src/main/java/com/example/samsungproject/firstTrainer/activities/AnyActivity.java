@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,15 +29,19 @@ import com.example.samsungproject.firstTrainer.ActivityRecord;
 import com.example.samsungproject.firstTrainer.FirstTrainerFields;
 import com.example.samsungproject.firstTrainer.dialogs.ActivityCreateDialog;
 import com.example.samsungproject.firstTrainer.dialogs.ActivitySwitchDialog;
+import com.example.samsungproject.popup.PopupTutorial;
 
 public abstract class AnyActivity extends AppCompatActivity {
     private FirstTrainerFrameBinding binding;
     private String name;
     protected Types type;
+    private RecyclerView rv;
+    private boolean tutorial, isNullName = false;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tutorial = FirstTrainerFields.isTutorialFourth();
 
         setType();
 
@@ -44,8 +50,9 @@ public abstract class AnyActivity extends AppCompatActivity {
         boolean isTask = getIntent().getBooleanExtra(IS_TASK.getName(), false);
 
         if(name == null){
-            parent = "Created Not By Create Activity Dialog";
-            name = "null " + FirstTrainerFields.getNullIndex(); //TODO: popup about it
+            parent = "Не известен";
+            name = "null " + FirstTrainerFields.getNullIndex();
+            isNullName = true;
         }
 
         ActivityRecord record = new ActivityRecord(name, parent, isTask, type, this::finish);
@@ -62,12 +69,35 @@ public abstract class AnyActivity extends AppCompatActivity {
                 getResources(), R.drawable.gradient,
                 new ContextThemeWrapper(getApplicationContext(), R.style.Theme_FirstTrainer).getTheme()));
 
-        ActivitiesAdapter adapter = new ActivitiesAdapter(name);
+        ActivitiesAdapter adapter = new ActivitiesAdapter(name, getResources());
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        RecyclerView rv = findViewById(R.id.table);
+        rv = findViewById(R.id.table);
         rv.setLayoutManager(llm);
         rv.setAdapter(adapter);
+
+        if(tutorial && isNullName) {
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                View popupView = getLayoutInflater().inflate(R.layout.tutorial_first_popup, null);
+                PopupTutorial popupTutorial = new PopupTutorial(popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        true);
+                popupTutorial.putString(getResources().getString(R.string.message_popup_first_4));
+                this.runOnUiThread(() -> {
+                    popupTutorial.showAsDropDown(rv.getChildAt(rv.getChildCount() - 1),
+                            (int) (getResources().getDisplayMetrics().density * 8), 0);
+                });
+            });
+            thread.start();
+            FirstTrainerFields.tutorialFourthUsed();
+            tutorial = false;
+        }
 
         sendMessageToBroadcast(ON_CREATE.getId());
     }
@@ -110,6 +140,10 @@ public abstract class AnyActivity extends AppCompatActivity {
         if(id == R.id.switch_activity){
             ActivitySwitchDialog dialog = new ActivitySwitchDialog();
             dialog.show(getSupportFragmentManager(), null);
+            return true;
+        }
+        if(id == R.id.exit){
+            FirstTrainerFields.exit();
             return true;
         }
 

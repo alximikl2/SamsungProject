@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_light"
-        android:text="Add New View"
+        android:text="@string/fragment_add_view_button"
         android:textColor="@color/second"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -62,7 +62,7 @@
                     android:paddingTop="0dp"
                     android:paddingRight="0dp"
                     android:paddingBottom="0dp"
-                    android:text="+"
+                    android:text="@string/plus_string"
                     android:textColor="@color/second"
                     android:textSize="18sp"
                     app:strokeColor="@color/second" />

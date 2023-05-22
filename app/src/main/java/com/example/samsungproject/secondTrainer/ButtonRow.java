@@ -124,4 +124,8 @@ public class ButtonRow {
         button.setClickable(false);
         button.setCurrent(true);
     }
+
+    public LinearLayout getLayout(){
+        return layout;
+    }
 }

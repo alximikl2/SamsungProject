@@ -6,7 +6,7 @@ import java.util.Objects;
 public class FirstTrainerFields {
     private static final ArrayList<ActivityRecord> records = new ArrayList<>();
     private static final ArrayList<Runnable> notifications = new ArrayList<>();
-    private static boolean tutorialFirst, tutorialSecond, tutorialThird;
+    private static boolean tutorialFirst, tutorialSecond, tutorialThird, tutorialFourth;
     private static int nullIterator = 0;
 
     public static int getNullIndex(){
@@ -18,6 +18,7 @@ public class FirstTrainerFields {
         tutorialFirst = bool;
         tutorialSecond = bool;
         tutorialThird = bool;
+        tutorialFourth = bool;
     }
 
     public static void addRecord(ActivityRecord record){
@@ -84,5 +85,21 @@ public class FirstTrainerFields {
             return true;
         }
         return false;
+    }
+
+    public static boolean isTutorialFourth() {
+        return tutorialFourth;
+    }
+
+    public static void tutorialFourthUsed() {
+        tutorialFourth = false;
+    }
+
+    public static void exit(){
+        notifications.clear();
+        for(ActivityRecord record: records){
+            record.finishActivity();
+        }
+        records.clear();
     }
 }

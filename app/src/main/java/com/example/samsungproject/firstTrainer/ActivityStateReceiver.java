@@ -18,14 +18,14 @@ public class ActivityStateReceiver extends BroadcastReceiver {
             String name = intent.getStringExtra(ON_CREATE.getName());
             if(name != null) {
                 Toast.makeText(context,
-                        "Activity " + name + " created",
+                        "Активность " + name + " создана",
                         Toast.LENGTH_SHORT).show();
             }
         } else if(id == ON_DESTROY.getId()){
             String name = intent.getStringExtra(ON_DESTROY.getName());
             if(name != null) {
                 Toast.makeText(context,
-                        "Activity " + name + " destroyed",
+                        "Активность " + name + " уничтожена",
                         Toast.LENGTH_SHORT).show();
             }
         }

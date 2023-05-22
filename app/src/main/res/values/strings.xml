@@ -1,13 +1,48 @@
 <resources>
-    <string name="more_info"><u>More info</u></string>
-
     <string name="message_popup_first_1">Первая колонка содержит имя активности.\nВо второй колонке рассположена дополнительная информация.\nВ заголовке окна - имя текущей активности.</string>
     <string name="message_popup_first_2">Здесь нужно ввести имя активности.\nИмя условно, оно нужно, чтобы пользователь различал активности.\nТакже необходимо выбрать тип активности.\nОб этих типах рассказано тут - https://developer.android.com/guide/components/activities/tasks-and-back-stack</string>
     <string name="message_popup_first_3">Здесь необходимо выбрать тип активности(он же класс), на который будет совершен переход.\nТакже необходимо вырать механизм перехода.\nПодробнее об этих механизмах - https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_CLEAR_TASK</string>
+    <string name="message_popup_first_4">Вы создали новую активность, когда пытались сменить другую.\nТакое поведение вполне естественно, и это полноценная активность, но имени в нашей системе у нее нету, поэтому она называется null.</string>
 
     <string name="message_popup_second_1">Это основное окно тренажера фрагментов.\nСверху будет находится ряд кнопок, благодаря которым можно менять видимый фрагмент, а также уже находится кнопка для добавления нового фрагмента.</string>
     <string name="message_popup_second_2">Здесь нужно ввести имя фрагмента.\nИмя условно, оно нужно, чтобы пользователь различал фрагменты.\nТакже необходимо выбрать механизм смены фрагмента.\nRemove - удаление самого фрагмента,\nDetach - удаление View фрагмента,\nHide - сокрытие View фрагмента.</string>
     <string name="message_popup_second_3">Вот и сам фрагмент. Здесь вы можете протестировать разницу между механизмами смены фрагментов.\nФрагменты меняются благодаря кнопок сверху, а кнопка посередине фрагмента позволяет динамически изменить View фрагмента.</string>
+
+    <string name="title_main">Выберите один из тренажеров</string>
+    <string name="activity_trainer_name">Activity Trainer</string>
+    <string name="activity_trainer_desc">Тренажер активностей, эмулирующий поведение разных активностей</string>
+    <string name="fragment_trainer_name">Fragment Trainer</string>
+    <string name="fragment_trainer_desc">Тренажер фрагметнов, благодаря которому можно исследовать их поведение</string>
+    <string name="hints_on_text">Включить подсказки</string>
+
+    <string name="add_string">Создать</string>
+    <string name="Add_dialog_edit_hint">Имя фрагмента</string>
+    <string name="add_dialog_edit_desc">Ведите имя фрагмента</string>
+    <string name="add_dialog_spinner_desc">Выберите метод появления фрагмента</string>
+
+    <string name="create_activity_dialog_edit_hint">Имя активности</string>
+    <string name="create_activity_dialog_edit_desc">Ведите имя фактивности</string>
+    <string name="create_activity_dialog_checkbox">Запустить как задачу</string>
+    <string name="create_activity_dialog_spinner_desc">Выберите тип активности</string>
+
+    <string name="fragment_add_view_button">Добавить новый View</string>
+    <string name="plus_string">+</string>
+
+    <string name="switch_string">Сменить</string>
+    <string name="switch_activity_dialog_spinner_reorder_desc">Выберите метод смены активности</string>
+    <string name="switch_activity_dialog_spinner_type_desc">Выберите тип активности</string>
+
+    <string name="finish_string">Завершить</string>
+
+    <string name="row_more_info"><u>More info</u></string>
+
+    <string name="create_activity_menu">Создать активность</string>
+    <string name="switch_activity_menu">Сменить активность</string>
+    <string name="exit_menu">Выйти</string>
+
+    <string name="parent_string">"Родитель: "</string>
+    <string name="task_string">"Задача: "</string>
+    <string name="type_string">"Тип: "</string>
 
     <string-array name="activity_choices">
         <item>Standard</item>

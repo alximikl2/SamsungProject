@@ -1,6 +1,5 @@
 package com.example.samsungproject.popup;
 
-import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -18,11 +17,10 @@ public class PopupInfo extends PopupWindow {
         this.task = view.findViewById(R.id.task);
         this.type = view.findViewById(R.id.type);
     }
-
-    @SuppressLint("SetTextI18n")
+    
     public void fillStrings(String parent, String task, String type){
-        this.parent.setText("Parent: " + parent);
-        this.task.setText("Task: " + task);
-        this.type.setText("Type: " + type);
+        this.parent.setText(parent);
+        this.task.setText(task);
+        this.type.setText(type);
     }
 }

@@ -4,7 +4,6 @@ import static com.example.samsungproject.firstTrainer.Tags.ID;
 import static com.example.samsungproject.firstTrainer.Tags.ON_CREATE;
 import static com.example.samsungproject.firstTrainer.Tags.ON_DESTROY;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -35,13 +34,13 @@ public class FirstTrainer extends AppCompatActivity {
     private final String name = Types.MAIN.getName();
     private RecyclerView rv;
     private boolean tutorial;
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tutorial = FirstTrainerFields.isTutorialFirst();
 
-        ActivityRecord record = new ActivityRecord(name, "No parent", true, Types.STANDARD, this::finish);
+        ActivityRecord record = new ActivityRecord(name, "Нет родителя", true, Types.STANDARD, this::finish);
         FirstTrainerFields.addRecord(record);
 
         binding = FirstTrainerBinding.inflate(getLayoutInflater());
@@ -54,7 +53,7 @@ public class FirstTrainer extends AppCompatActivity {
         actionBar.setBackgroundDrawable(ResourcesCompat.getDrawable(
                 getResources(), R.drawable.gradient, getTheme()));
 
-        ActivitiesAdapter adapter = new ActivitiesAdapter(Types.MAIN.getName());
+        ActivitiesAdapter adapter = new ActivitiesAdapter(Types.MAIN.getName(), getResources());
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv = findViewById(R.id.table);
@@ -126,6 +125,10 @@ public class FirstTrainer extends AppCompatActivity {
         if(id == R.id.switch_activity){
             ActivitySwitchDialog dialog = new ActivitySwitchDialog();
             dialog.show(getSupportFragmentManager(), null);
+            return true;
+        }
+        if(id == R.id.exit){
+            FirstTrainerFields.exit();
             return true;
         }
 

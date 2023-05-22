@@ -3,6 +3,8 @@ package com.example.samsungproject.firstTrainer;
 import static com.example.samsungproject.firstTrainer.activities.Types.MAIN;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import java.util.Objects;
 public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ViewHolder> {
     private ArrayList<ActivityRecord> records;
     private final String activityName;
+    private final Resources resources;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //private final TextView typeTextView;
@@ -57,9 +60,10 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
         public View getPopupView(){return popupView;}
     }
 
-    public ActivitiesAdapter(String activityName) {
+    public ActivitiesAdapter(String activityName, Resources resources) {
         this.activityName = activityName;
         this.records = FirstTrainerFields.getRecords();
+        this.resources = resources;
         FirstTrainerFields.addNotification(this::update);
     }
 
@@ -107,11 +111,21 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     true);
             if(record.isTask()) {
-                popupWindow.fillStrings(record.getParent(), "Task", record.getType().getName());
+                popupWindow.fillStrings(
+                        resources.getString(R.string.parent_string) + record.getParent(),
+                        resources.getString(R.string.task_string) + "Задача",
+                        resources.getString(R.string.type_string) + record.getType().getName());
             } else {
-                popupWindow.fillStrings(record.getParent(), "Not A Task", record.getType().getName());
+                popupWindow.fillStrings(
+                        resources.getString(R.string.parent_string) + record.getParent(),
+                        resources.getString(R.string.task_string) + "Не задача",
+                        resources.getString(R.string.type_string) + record.getType().getName());
             }
-            popupWindow.showAsDropDown(view);
+            try {
+                popupWindow.showAsDropDown(view);
+            } catch (IllegalStateException e){
+                Log.e("Double click", e.getLocalizedMessage());
+            }
         });
 
     }

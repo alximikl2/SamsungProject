@@ -1,6 +1,5 @@
 package com.example.samsungproject.secondTrainer;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.example.samsungproject.popup.PopupTutorial;
 import com.google.android.material.button.MaterialButton;
 
 public class MainFragment extends Fragment {
-
     private FragmentMainBinding binding;
     private final ButtonRow buttonRow;
     private final FragmentTypes type;
@@ -41,12 +39,9 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
@@ -88,8 +83,8 @@ public class MainFragment extends Fragment {
                         true);
                 popupTutorial.putString(getResources().getString(R.string.message_popup_second_3));
                 viewForPopup.post(() -> {
-                    popupTutorial.showAsDropDown(binding.typeTextview,
-                            (int) (getResources().getDisplayMetrics().density * -8), 0);
+                    popupTutorial.showAsDropDown(buttonRow.getLayout(),
+                            (int) (getResources().getDisplayMetrics().density * 8), 0);
                 });
             });
             thread.start();
